@@ -1,7 +1,3 @@
-<p align="center">
-<img src="https://github.com/kura-labs-org/kuralabs_deployment_1/blob/main/Kuralogo.png">
-</p>
-
 ## Deployment Instructions:
 1. Create a VPC with Terraform and the VPC **MUST** have only the components listed below:
     - 1 VPC
