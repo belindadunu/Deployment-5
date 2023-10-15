@@ -27,8 +27,10 @@ junit 'test-reports/results.xml'
 }
 stage ('Deploy') {
 steps {
-sh '''
-"ssh ubuntu@23.22.92.25 'bash -s' < setup.sh"
+sh '''#!/bin/bash
+withCredentials([string(credentialsId: 'remote_ip', variable: 'REMOTE_IP')]) {
+    def remote_ip = credentials('remote_ip')
+    sh "ssh ubuntu@{remote_ip} 'bash -s' < setup.sh"
 '''
 }
 }
