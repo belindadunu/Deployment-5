@@ -4,14 +4,16 @@ pipeline {
     stage ('Clean') {
       steps {
         sh '''#!/bin/bash
-        export REMOTE_IP=$(curl -s ifconfig.me) && scp pkill.sh ubuntu@$REMOTE_IP:/home/ubuntu/pkill.sh && ssh ubuntu@$REMOTE_IP 'chmod +x /home/ubuntu/pkill.sh && /home/ubuntu/pkill.sh'
+        scp pkill.sh ubuntu34.201.140.137:/home/ubuntu/
+        ssh ubuntu@34.201.140.137 'bash -s < pkill.sh'
         '''
      }
    }
  stage ('Deploy') {
   steps {
      sh '''#!/bin/bash
-     export REMOTE_IP=$(curl -s ifconfig.me) && scp setup2.sh ubuntu@$REMOTE_IP:/home/ubuntu/setup2.sh && ssh ubuntu@$REMOTE_IP 'chmod +x /home/ubuntu/setup2.sh && /home/ubuntu/setup2.sh'
+     scp setup2.sh ubuntu34.201.140.137:/home/ubuntu/
+     ssh ubuntu@34.201.140.137 'bash -s < setup2.sh'
     '''
       }
     }
