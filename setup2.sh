@@ -1,7 +1,7 @@
 #!/bin/bash
 rm -rf Deployment_5
 source test/bin/activate
-git clone https://https://github.com/belindadunu/Deployment_5.git
+git clone https://github.com/belindadunu/Deployment_5.git
 cd Deployment_5
 pip install -r requirements.txt
 pip install gunicorn
