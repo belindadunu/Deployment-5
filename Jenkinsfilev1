@@ -27,8 +27,8 @@ junit 'test-reports/results.xml'
 }
 stage ('Deploy') {
 steps {
-sh '''export REMOTE_IP=$(curl -s ifconfig.me) && scp setup.sh ubuntu@$REMOTE_IP:/home/ubuntu/setup.sh && ssh ubuntu@$REMOTE_IP 'chmod +x /home/ubuntu/setup.sh && /home/ubuntu/setup.sh'
-
+sh '''
+"ssh ubuntu@23.22.92.25 'bash -s' < setup.sh"
 '''
 }
 }
