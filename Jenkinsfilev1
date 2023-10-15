@@ -28,7 +28,8 @@ junit 'test-reports/results.xml'
 stage ('Deploy') {
 steps {
 sh ''' #!/bin/bash
-ssh "ubuntu@${env.REMOTE_IP} 'bash -s' < setup.sh"
+scp setup.sh ubuntu34.201.140.137:/home/ubuntu/
+ssh ubuntu@34.201.140.137 'bash -s < setup.sh'
 '''
 }
 }
