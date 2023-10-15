@@ -4,7 +4,7 @@ pipeline {
     stage ('Clean') {
       steps {
         sh '''#!/bin/bash
-        scp pkill.sh ubuntu34.201.140.137:/home/ubuntu/
+        scp pkill.sh ubuntu@34.201.140.137:/home/ubuntu/
         ssh ubuntu@"$34.201.140.137" "cd /home/ubuntu/Deployment_5 && sudo chmod 777 pkill.sh && ./pkill.sh"
         '''
      }
@@ -12,7 +12,7 @@ pipeline {
  stage ('Deploy') {
   steps {
      sh '''#!/bin/bash
-     scp setup2.sh ubuntu34.201.140.137:/home/ubuntu/
+     scp setup2.sh ubuntu@34.201.140.137:/home/ubuntu/
      ssh ubuntu@34.201.140.137 'bash -s < setup2.sh'
     '''
       }
