@@ -3,8 +3,8 @@
 
 python3.7 -m venv test
 source test/bin/activate
-git clone https://github.com/LamAnnieV/deploy_5.git
-cd deploy_5
+git clone https://github.com/belindadunu/Deployment_5.git
+cd Deployment_5
 pip install -r requirements.txt
 pip install gunicorn
 python database.py
