@@ -1,7 +1,7 @@
 # Deploying a Three-Tier Retail Banking Application
 
-## Overview
-The objective of this project was to deploy a 3-tier banking application leveraging Terraform for infrastructure provisioning and Jenkins for Continuous Integration/Continuous Deployment (CI/CD) automation. In response to specific challenges faced during manual deployments, this approach was adopted to enhance consistency, collaboration, and the overall quality of deployments.
+## Deployment Overview
+The objective of this project was to deploy a 3-tier banking application leveraging Terraform infrastructure as code (IAC)  provisioning and Jenkins for Continuous Integration/Continuous Deployment (CI/CD) automation. In response to specific challenges faced during manual deployments, this approach was adopted to enhance consistency, collaboration, and the overall quality of deployments.
 
 ## Infrastructure Overview
 - VPC with 10.0.0.0/16 CIDR
@@ -20,7 +20,7 @@ The objective of this project was to deploy a 3-tier banking application leverag
 ## Jenkins Server Setup
 - Installed Jenkins on the first EC2 instance
   - Dedicated server for CI/CD automation
-- Created Jenkins user account for deployment
+- Created Jenkins user account and password for deployment
   - Enhanced security for managing deployments
 - Generated SSH keys and copied the public key to the app server
   - Allows SSH access without a password from Jenkins to the app instance
@@ -53,7 +53,7 @@ _the original home.html web application_.
 <img width="1219" alt="Screen Shot 2023-10-15 at 3 03 25 PM" src="https://github.com/belindadunu/Deployment_5/assets/139175163/f3fe7572-2f6f-404e-b19b-6e980c7e41df">
 _the updated web application after running the Jenkinsfilev2 and re-running the Jenkinsfilev1_.
 
-## 3. Purpose and Benefits:
+### Purpose and Benefits:
 By embracing Terraform and Jenkins, we aim to achieve several significant benefits:
 - **Scalability:** Seamlessly scale infrastructure based on demand for optimal performance during high traffic periods.
 - **Security:** Implement robust encryption protocols, user access controls, and network security policies.
@@ -112,6 +112,8 @@ Updated the path to correctly reference setup.sh within the cloned repo:
 
 This ensured Jenkins could find setup.sh before trying to copy it to the remote server.
 
+![Dep5](https://github.com/belindadunu/Deployment_5/assets/139175163/0f7df881-eb12-4253-9dc6-7ad98b70315c)
+
 ## Optimizations
 1. **Integrate Terraform and Jenkins**
    - Use Jenkins to run `terraform apply` to provision infrastructure.
@@ -129,7 +131,7 @@ This ensured Jenkins could find setup.sh before trying to copy it to the remote 
    - Regularly monitor your AWS resources to identify underutilized instances. Consider using reserved instances for predictable workloads and spot instances for non-critical tasks to optimize costs.
 
 6. **Backup and Disaster Recovery:**
-   - Implement regular automated backups of your data and applications. Utilize AWS services like Amazon S3 for data storage and configure lifecycle policies to move data to cost-effective storage classes over time.
+   - Implement regular automated backups of the data and applications. Utilize AWS services like Amazon S3 for data storage and configure lifecycle policies to move data to cost-effective storage classes over time.
 
 ## Conclusion
 This project demonstrated the use of Terraform and Jenkins to automate the deployment of a 3-tier banking application on AWS infrastructure. The implementation of infrastructure as code and CI/CD pipelines significantly improves consistency, collaboration, and maintainability of the deployment process.
