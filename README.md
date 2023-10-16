@@ -48,9 +48,11 @@ The objective of this project was to deploy a 3-tier banking application leverag
 - Ran build using Jenkinsfilev1 to deploy merged the main branch
 
 <img width="1219" alt="Screen Shot 2023-10-15 at 6 22 47 PM" src="https://github.com/belindadunu/Deployment_5/assets/139175163/66750f70-375a-47b3-9e40-ca375ad26bfb">
+
 _the original home.html web application_.
 
 <img width="1219" alt="Screen Shot 2023-10-15 at 3 03 25 PM" src="https://github.com/belindadunu/Deployment_5/assets/139175163/f3fe7572-2f6f-404e-b19b-6e980c7e41df">
+
 _the updated web application after running the Jenkinsfilev2 and re-running the Jenkinsfilev1_.
 
 ### Purpose and Benefits:
