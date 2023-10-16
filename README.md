@@ -1,58 +1,66 @@
-# Deploying a Banking Application on AWS
 
-## 1. Introduction:
-The goal of this project was to deploy a 3-tier banking app using Terraform for infrastructure as code and Jenkins for CI/CD automation. In response to specific challenges faced during manual deployments, this approach was adopted to enhance consistency, collaboration, and the overall quality of deployments.
+## Issues Faced
 
-## 2. Infrastructure Overview:
+## Compromised AWS Credentials
+During testing, my AWS account credentials were inadvertently exposed in the public GitHub repository. This led to the credentials being compromised.
 
-### VPC Configuration:
-- CIDR Block: 10.0.0.0/16
-  - Custom VPC provides isolation and security for applications  
-- 2 public subnets in separate AZs
-- Internet gateway for public subnet internet access
-- 2 Ubuntu 18.04 t2.micro EC2 instances for build server and application isolation
+**To resolve this:**
 
-### Security Groups:
-- **Jenkins SG:**
-  - Opens port 8080 and 22
-- **App SG:**
-  - Opens port 8000 and 22
+1. Reset the AWS credentials and generated new access keys.
+2. Updated the credentials stored in Terraform configuration files with the new keys.
 
-## 3. Purpose and Benefits:
-By embracing Terraform and Jenkins, our team aimed to achieve several significant benefits:
-- **Scalability:** Seamlessly scale infrastructure based on demand for optimal performance during high traffic periods.
-- **Security:** Implement security protocols, user access controls, and network security policies.
-- **Collaboration:** Facilitate teamwork through version-controlled infrastructure as code, enabling effective collaboration among team members.
-- **Maintainability:** Ensure easy maintenance and updates of infrastructure components, leading to improved system stability and reduced downtime.
+## Invalid Key Pair Error
+After resetting credentials, Terraform apply began failing with an "InvalidKeyPair.NotFound" error when trying to launch EC2 instances.
 
-## 4. Challenges and Solutions:
-### Challenges Faced:
+The cause was the existing key pair was associated with the compromised credentials. **To fix:**
+
+1. Deleted the old key pair within AWS which was tied to old credentials.
+2. Created a new key pair using Terraform's aws_key_pair resource.
+3. Associated the new key pair to EC2 instances.
+
+This ensured that only Terraform had access to the new key pair, improving security.
+
+## Takeaways
+- Be careful not to commit confidential data like AWS credentials to public repositories.
+- Reset compromised credentials immediately and rotate access keys.
+- Manage infrastructure elements like key pairs through Terraform rather than manually.
 
 
-### Solutions Implemented:
+## Optimizations
 
+1. **Integrate Terraform and Jenkins**
+   - Use Jenkins to run `terraform apply` to provision infrastructure.
+   - Add validation checks in Jenkins to verify the environment is ready before deploying application code.
 
-### Lessons Learned:
-The challenges encountered provided valuable insights, emphasizing the importance of meticulous planning and collaborative problem-solving. These lessons will guide our future deployments, ensuring smoother processes and faster resolutions. *elaborate here*
+2. **Launch Configuration and Auto Scaling**
+   - Create a launch configuration with an AMI baked with application dependencies.
+   - Set up auto-scaling groups using the launch configuration to scale instances based on demand.
 
-## 5. Security Measures:
-To guarantee the security of our deployed application, the following measures were implemented:
-- **User Access Controls:** Restriction of user access through secure authentication methods, ensuring authorized personnel can modify configurations (was config, access keys, key pairs).
-- **Network Security Policies:** Strict firewall rules and network segmentation to prevent unauthorized access attempts.
+3. **Terraform Modules**
+   - Break infrastructure into reusable modules for VPC, network, compute, load balancing, etc.
+   - Improves collaboration, maintainability, and consistency.
 
-## 6. Testing Procedures:
-### Test Scenarios:
+4. **Cost Optimization:**
+   - Regularly monitor your AWS resources to identify underutilized instances. Consider using reserved instances for predictable workloads and spot instances for non-critical tasks to optimize costs.
 
+6. **Backup and Disaster Recovery:**
+   - Implement regular automated backups of your data and applications. Utilize AWS services like Amazon S3 for data storage and configure lifecycle policies to move data to cost-effective storage classes over time.
 
-### Test Results:
+## Conclusion
 
+This project demonstrated the use of Terraform and Jenkins to automate the deployment of a 3-tier banking application on AWS infrastructure. The implementation of infrastructure as code and CI/CD pipelines significantly improves consistency, collaboration, and maintainability of the deployment process.
 
-## 7. Scalability and Future Enhancements:
-### Scalability Measures:
-The infrastructure was designed with scalability in mind, allowing for seamless expansion of resources based on demand through Terraform if/when reuired. Load balancers and auto-scaling configurations could be implemented to ensure the application can handle varying workloads effectively.
+During the architectural design, a decision was made to place both the Jenkins server and the application instances in public subnets with internet access. An alternative approach could be placing the application servers in private subnets with no direct internet connectivity.
 
-### Future Enhancements:
+**Public Subnets:**
+- Simpler to connect to both Jenkins and app servers from the internet.
+- May reduce the need for a bastion host or VPN.
+- Jenkins UI remains accessible for easier administration.
 
-## 8. Conclusion:
-### Achievements:
-This deployment initiative resulted in several key achievements, including enhanced deployment speed, improved reliability, and strengthened security measures....
+**Private Subnets:**
+- Increased security for application servers by removing public exposure.
+- Access is controlled through a bastion host, VPN, or proxy.
+- May add complexity for administering both Jenkins and app servers.
+
+For this initial implementation, public subnets were chosen for their simplicity. However, as the application grows and security requirements evolve, utilizing private subnets for the application tier could enhance the overall security posture. This highlights the importance of continuously evaluating and improving architectural decisions to meet changing needs.
+
