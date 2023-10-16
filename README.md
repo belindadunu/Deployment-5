@@ -113,7 +113,7 @@ Updated the path to correctly reference setup.sh within the cloned repo:
 
 This ensured Jenkins could find setup.sh before trying to copy it to the remote server.
 
-![Dep5](https://github.com/belindadunu/Deployment_5/assets/139175163/0f7df881-eb12-4253-9dc6-7ad98b70315c)
+![Dep5](https://github.com/belindadunu/Deployment_5/assets/139175163/631c114a-4e03-45ce-b227-07c58b8f4f4d)
 
 ## Optimizations
 1. **Integrate Terraform and Jenkins**
