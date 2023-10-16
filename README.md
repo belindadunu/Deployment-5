@@ -52,7 +52,6 @@ The objective of this project was to deploy a 3-tier banking application leverag
 _the original home.html web application_.
 
 <img width="1193" alt="Screen Shot 2023-10-15 at 6 22 47 PM" src="https://github.com/belindadunu/Deployment_5/assets/139175163/36f18969-c7ca-4a0a-99cb-4a186398317b">
-
 _the updated web application after running the Jenkinsfilev2 and re-running the Jenkinsfilev1_.
 
 ### Purpose and Benefits:
