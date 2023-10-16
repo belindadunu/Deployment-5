@@ -1,4 +1,4 @@
-# Running a Retail Banking Application on an EC2 Server with Terraform and Jenkins
+# Deploying a Three-Tier Retail Banking Application
 
 ## Overview
 The objective of this project was to deploy a 3-tier banking application leveraging Terraform for infrastructure provisioning and Jenkins for Continuous Integration/Continuous Deployment (CI/CD) automation. In response to specific challenges faced during manual deployments, this approach was adopted to enhance consistency, collaboration, and the overall quality of deployments.
